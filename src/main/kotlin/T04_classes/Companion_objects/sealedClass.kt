@@ -11,19 +11,19 @@ enum class Entity3Type {
 
 
 object Entity3Factory {
-    fun create( type: Entity4Type) : Entity3 {
+    fun create( type: Entity5Type) : Entity3 {
         val id = UUID.randomUUID().toString()
         val name = when(type) {
-            Entity4Type.HELP -> type.name
-            Entity4Type.EASY -> type.name
-            Entity4Type.MEDIUM -> type.geFormattedName()
-            Entity4Type.HARD -> "Hard"
+            Entity5Type.HELP -> type.name
+            Entity5Type.EASY -> type.name
+            Entity5Type.MEDIUM -> type.geFormattedName()
+            Entity5Type.HARD -> "Hard"
         }
         return when(type) {
-            Entity4Type.HELP -> Entity3.Help
-            Entity4Type.EASY -> Entity3.Easy(id, name)
-            Entity4Type.MEDIUM -> Entity3.Medium(id, name)
-            Entity4Type.HARD -> Entity3.Hard(id, name, 2.0f)
+            Entity5Type.HELP -> Entity3.Help
+            Entity5Type.EASY -> Entity3.Easy(id, name)
+            Entity5Type.MEDIUM -> Entity3.Medium(id, name)
+            Entity5Type.HARD -> Entity3.Hard(id, name, 2.0f)
         }
     }
 }
@@ -41,7 +41,7 @@ sealed class Entity3 () {
 }
 
 fun main() {
-    val entity = Entity3Factory.create(Entity4Type.EASY)    //get EASY class.. or HELP class. ....
+    val entity = Entity3Factory.create(Entity5Type.EASY)    //get EASY class.. or HELP class. ....
     println(entity)
 
 val msg = when(entity) {

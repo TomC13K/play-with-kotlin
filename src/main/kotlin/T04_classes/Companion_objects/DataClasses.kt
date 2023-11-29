@@ -12,30 +12,40 @@ enum class Entity4Type {
 
 
 object Entity4Factory {
-    fun create( type: Entity4Type) : Entity4 {
+    fun create( type: Entity5Type) : Entity5 {
         val id = UUID.randomUUID().toString()
         val name = when(type) {
-            Entity4Type.HELP -> type.name
-            Entity4Type.EASY -> type.name
-            Entity4Type.MEDIUM -> type.geFormattedName()
-            Entity4Type.HARD -> "Hard"
+            Entity5Type.HELP -> type.name
+            Entity5Type.EASY -> type.name
+            Entity5Type.MEDIUM -> type.geFormattedName()
+            Entity5Type.HARD -> "Hard"
         }
         return when(type) {
-            Entity4Type.HELP -> Entity4.Help
-            Entity4Type.EASY -> Entity4.Easy(id, name)
-            Entity4Type.MEDIUM -> Entity4.Medium(id, name)
-            Entity4Type.HARD -> Entity4.Hard(id, name, 2.0f)
+            Entity5Type.HELP -> Entity5.Help
+            Entity5Type.EASY -> Entity5.Easy(id, name)
+            Entity5Type.MEDIUM -> Entity5.Medium(id, name)
+            Entity5Type.HARD -> Entity5.Hard(id, name, 2.0f)
         }
     }
 }
 
 sealed class Entity4 () {
-    object Help : Entity4(){            // companion object need to extend from parent Entity3
+    object Help : Entity5(){            // companion object need to extend from parent Entity3
         val name = "Help"
     }
-    data class Easy(val id: String, val name: String): Entity4()
-    data class Medium(val id: String, val name: String): Entity4()
-    data class Hard(val id: String, val name: String, val multiplier: Float): Entity4()
+
+    // We can overwrite equals or hascodes by adding functions to the class itself
+    data class Easy(val id: String, val name: String): Entity5() {
+        override fun equals(other: Any?): Boolean {
+           return super.equals(other)
+        }
+
+        override fun hashCode(): Int {
+            return super.hashCode()
+        }
+    }
+    data class Medium(val id: String, val name: String): Entity5()
+    data class Hard(val id: String, val name: String, val multiplier: Float): Entity5()
 
 }
 
@@ -49,7 +59,7 @@ fun main() {
     // val entity2 = Entity4.Easy("id","name")
 
     // data classes can copy constructors
-    val entity1 = Entity4.Easy("id","name")
+    val entity1 = Entity5.Easy("id","name")
     // val entity2 = entity1.copy()                                      // equal
     val entity2 = entity1.copy(name = "myname")                         // NOT equal
 
