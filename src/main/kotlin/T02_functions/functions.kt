@@ -22,9 +22,17 @@ fun passParams( item : String) {
 // change to single expression function
 fun passParams1( item : String) = println("Hello $item function single")
 
-fun sayHelloArray(greeting : String, itemToGreet  :String)  = println("$greeting $itemToGreet")
+// default values syntax
+fun sayHello(greeting : String = "One", itemToGreet  :String = "Two")  = println("$greeting $itemToGreet")
 
 fun sayHelloList( greeting: String, itemsToGreet: List<String>){
+    itemsToGreet.forEach { itemToGreet ->
+        println("$greeting $itemToGreet")
+    }
+}
+
+// vararg - variable number of strings can be 0 n use only first argument or can add many more strings
+fun varargStrings( greeting: String, vararg itemsToGreet :String){
     itemsToGreet.forEach { itemToGreet ->
         println("$greeting $itemToGreet")
     }
@@ -49,5 +57,22 @@ fun main() {
 
     val listOgThings = listOf("Kotlin", "Programming", "Comic Books")
     sayHelloList("Hi", listOgThings)
+
+    //----------------- vararg -----------------
+    varargStrings("var 1")
+    varargStrings("var 2", "Kotlin")
+    varargStrings("var 3", "Kotlin", "Programming", "Comic Books")
+
+    // pass array to vararg
+    // it requires string not Array so use spread operator *, where we iterate over array n pass each string element
+    varargStrings("var 4", *interestingThings)
+
+    // ----------------- named arguments -----------------
+    sayHello(greeting = "Hi", itemToGreet = "somethin")
+    sayHello()  //using both default values without arguments
+
+    // when using named argument, all arguments passed must be named not just one
+    // with named variables we can switch order
+    varargStrings(itemsToGreet = interestingThings, greeting = "Hi")
 
 }
