@@ -1,11 +1,11 @@
-package com.kotlinDemoApi.studentSetvice
+package com.kotlinDemoApi.studentService
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class StudentSetviceApplication
+class StudentServiceApplication
 
 fun main(args: Array<String>) {
-	runApplication<StudentSetviceApplication>(*args)
+	runApplication<StudentServiceApplication>(*args)
 }
