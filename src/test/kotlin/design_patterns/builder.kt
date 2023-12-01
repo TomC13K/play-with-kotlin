@@ -30,7 +30,7 @@ class Component private constructor(builder: Builder) {
 
 class ComponentTest {
     @Test
-    fun testBuilder() {
+    fun testBuilder_setAllParams() {
         val component = Component.Builder()                 // Component has private constructor so can only instantiate using Builder
             .setParam1("param1")
             .setParam2(2)
@@ -40,5 +40,17 @@ class ComponentTest {
         assertEquals("param1", component.param1)
         assertEquals(2, component.param2)
         assertEquals(true, component.param3)
+    }
+
+    @Test
+    fun testBuilder_set2Params() {
+        val component = Component.Builder()                 // Component has private constructor so can only instantiate using Builder
+            .setParam1("param1")
+            .setParam2(2)
+            .build()
+
+        assertEquals("param1", component.param1)
+        assertEquals(2, component.param2)
+        assertEquals(null, component.param3)
     }
 }
